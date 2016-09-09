@@ -1,0 +1,25 @@
+{
+  "author" : "Brian Kuperman",
+  "commands" : [
+    {
+      "script" : "script.cocoascript",
+      "name" : "Quick Crop",
+      "shortcut": "cmd shift y",
+      "handlers" : {
+        "run" : "onRun"
+      },
+      "identifier" : "com.bohemiancoding.sketch.runscriptidentifier"
+    }
+  ],
+  "menu" : {
+    "items" : [
+      "com.bohemiancoding.sketch.runscriptidentifier"
+    ],
+    "title" : "Quick Crop"
+  },
+  "identifier" : "com.example.sketch.c2f34e58-a397-466c-b798-80bfc4380d9d",
+  "version" : "1.0",
+  "description" : "A quick way to crop imported photos to a selected shape",
+  "authorEmail" : "Brian@rekupe.com",
+  "name" : "Quick Crop"
+}

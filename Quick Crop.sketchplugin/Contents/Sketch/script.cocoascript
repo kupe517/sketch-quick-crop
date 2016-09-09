@@ -1,0 +1,49 @@
+var onRun = function(context) {
+  var doc        = context.document
+  var selection  = [doc findSelectedLayers]
+  var pluginName = 'Quick Crop'
+  if ([selection count] > 0) {
+    processSelection(selection)
+  } else {
+    [doc showMessage: pluginName + ': select something']
+  }
+};
+
+function processSelection(layers) {
+  for (var i = 0; i < [layers count]; i++) {
+    var layer = [layers objectAtIndex:i]
+    if([layer class] == "MSShapeGroup"){
+        var shape = layer
+        var shapeRect = [layer rect]
+        var shapeWidth = shapeRect.size.width
+        var shapeHeight = shapeRect.size.height
+        var shapeY = shapeRect.origin.y
+        var shapeX = shapeRect.origin.x
+        var shapeRatio = shapeWidth / shapeHeight
+    }
+    if([layer class] == "MSBitmapLayer"){
+        var imageRect = [layer rect]
+        var imageWidth = imageRect.size.width
+        var imageHeight = imageRect.size.height
+        var imageRatio = imageWidth / imageHeight
+        var imageFrame = [layer frame]
+        if(shapeRatio > imageRatio){
+          [imageFrame setWidth:shapeWidth]
+        }else{
+          [imageFrame setHeight:shapeHeight]
+        }
+        [imageFrame setY:shapeY]
+        [imageFrame setX:shapeX]
+    }
+  }
+  var group = MSLayerArray.arrayWithLayers(layers)
+  MSMaskWithShape.createMaskWithShapeForLayers(group)
+}
+
+// Console log the outputs of an array
+function printArray(array){
+  log('Array:')
+  for (var i = 0; i < array.length; i++) {
+    log(array[i])
+  }
+}
